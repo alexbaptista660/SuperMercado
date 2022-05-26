@@ -7,7 +7,7 @@ const port = 3100
 // permite recibir cuerpos json 
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { //refieriendo al "localhost:3100"
     res.send("hola mundo este es mi primer API")
 })
 
@@ -23,4 +23,3 @@ app.listen(port, () => {
 //INTEGRANTES
 //- Alex Gary Baptista Fariñas
 //- nombre de prueba
-// - nombre segunda persona

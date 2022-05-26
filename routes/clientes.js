@@ -6,9 +6,9 @@ const router = express.Router()
 
 const servicios = new serviciosClientes()
 //con parametro opcional "edad", en la ruta se escribe "localhost:3100/clientes?edad=X"
-router.get('/', async (req,res) => {
+router.get('/', async (req,res) => { // refiere a la ruta "localhost:3100/clientes"
     try{
-        const { edad } = req.query
+        const { edad } = req.query // patametro opcional
         const cliente = await servicios.createCliente(edad)
         res.json(cliente)
     }
@@ -28,6 +28,7 @@ router.get('/:id', (req, res)=>{
     })
 })
 
+//CRUD
 
 
 

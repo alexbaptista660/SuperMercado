@@ -1,22 +1,22 @@
 const getConection = require('../libs/postgres')
 
-class productosServicios{
+class compraServicios{
 
     constructor(){
         const servicios = []
     }
 
-    async listarProductos(){
+    async listarCompra(){
         const conexion = getConection()
-        const productos = await (await conexion).query('Select * from public.productos')
-        return productos.rows
+        const compra = await (await conexion).query('Select * from public.compra')
+        return compra.rows
     }
 
-    async buscarPrudcto(id){
+    async buscarCompra(id){
         const conexion = getConection()
         //const productos =  await (await conexion).query('Select * from public.productos')
-        const productos = await (await conexion).query('Select * from public.productos where id_producto = ' + id)
-        return productos.rows
+        const compra = await (await conexion).query('Select * from public.compra where id_compra = ' + id)
+        return compra.rows
     }
 
     crearProducto(body){
@@ -33,4 +33,4 @@ class productosServicios{
 
 }
 
-module.exports = productosServicios
+module.exports = compraServicios

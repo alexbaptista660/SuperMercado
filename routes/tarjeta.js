@@ -1,15 +1,14 @@
 const express = require('express')
-const { route } = require('express/lib/application')
-const ServiciosProducto = require('../servicios/productoServicios')
+const ServiciosTarjeta = require('../servicios/tarjetaServicios')
 
-const servicios = new ServiciosProducto()
+const servicios = new ServiciosTarjeta()
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/mostrar', async (req, res) => {
     try{
-        const productos = await servicios.listarProductos()
-        res.json(productos)
+        const tarjeta = await servicios.listarTarjetas()
+        res.json(tarjeta)
     }
     catch(error){
         res.status(404).json({
@@ -23,13 +22,13 @@ router.get('/', async (req, res) => {
 router.get('/buscar/:id', async (req, res) =>{
     try {
         const id = req.params.id
-        const producto = await servicios.buscarPrudcto(id)
-        if(!producto){
+        const tarjeta = await servicios.buscarTarjeta(id)
+        if(!tarjeta){
             throw new Error('Producto no encontrado')
         }
         res.json({
             id : id,
-            producto : producto
+            tarjeta : tarjeta
         })
     } catch (error) {
         res.status(404).json({
@@ -37,14 +36,5 @@ router.get('/buscar/:id', async (req, res) =>{
         })
     }
 })
-
-//crear un producto
-router.post('/crear')
-
-//modificar un producto
-router.put('/modificar')
-
-//eliminar un prodcuto
-router.delete('eliminar')
 
 module.exports = router

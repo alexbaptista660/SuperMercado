@@ -1,15 +1,13 @@
 const express = require('express')
-const { route } = require('express/lib/application')
-const ServiciosProducto = require('../servicios/productoServicios')
+const ServiciosDetalleCompra = require('../servicios/detalleCompraServicios')
 
-const servicios = new ServiciosProducto()
-
+const servicios = new ServiciosDetalleCompra()
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/mostrar', async (req, res) => {
     try{
-        const productos = await servicios.listarProductos()
-        res.json(productos)
+        const detalle_compra = await servicios.listarDetalleCompra()
+        res.json(detalle_compra)
     }
     catch(error){
         res.status(404).json({
@@ -23,13 +21,13 @@ router.get('/', async (req, res) => {
 router.get('/buscar/:id', async (req, res) =>{
     try {
         const id = req.params.id
-        const producto = await servicios.buscarPrudcto(id)
-        if(!producto){
+        const detalle_compra = await servicios.buscarDetalleCompra(id)
+        if(!detalle_compra){
             throw new Error('Producto no encontrado')
         }
         res.json({
             id : id,
-            producto : producto
+            detalle_compra : detalle_compra
         })
     } catch (error) {
         res.status(404).json({

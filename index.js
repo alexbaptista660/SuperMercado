@@ -1,5 +1,6 @@
 const express = require('express')
 const routerApi = require('./routes/index')
+const {logError,errorHandler, boomError}=require('./middlewares/error.handler')
 
 const app = express()
 const port = 3100
@@ -13,13 +14,11 @@ app.get('/', (req, res) => { //refieriendo al "localhost:3100"
 
 routerApi(app)
 
+app.use(logError)
+app.use(errorHandler)
+app.use(boomError)
+
 app.listen(port, () => {
     console.log("El servidor se esta ejecutando")
 })  
 
-//prueba de github
-//los integrantes deben agregar sus nombre
-//
-//INTEGRANTES
-//- Alex Gary Baptista Fariñas
-//- nombre de prueba

@@ -1,22 +1,22 @@
 const getConection = require('../libs/postgres')
 
-class productosServicios{
+class ModoPagoServicios{
 
     constructor(){
         const servicios = []
     }
 
-    async listarProductos(){
+    async listarModoPago(){
         const conexion = getConection()
-        const productos = await (await conexion).query('Select * from public.productos')
-        return productos.rows
+        const modoPago = await (await conexion).query('Select * from public.modo_pago')
+        return modoPago.rows
     }
 
-    async buscarPrudcto(id){
+    async buscarModoPago(id){
         const conexion = getConection()
         //const productos =  await (await conexion).query('Select * from public.productos')
-        const productos = await (await conexion).query('Select * from public.productos where id_producto = ' + id)
-        return productos.rows
+        const modoPago = await (await conexion).query('Select * from public.modo_pago where id_pago = ' + id)
+        return modoPago.rows
     }
 
     crearProducto(body){
@@ -33,4 +33,4 @@ class productosServicios{
 
 }
 
-module.exports = productosServicios
+module.exports = ModoPagoServicios

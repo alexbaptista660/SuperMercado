@@ -1,15 +1,13 @@
 const express = require('express')
-const { route } = require('express/lib/application')
-const ServiciosProducto = require('../servicios/productoServicios')
+const ServiciosCompra = require('../servicios/compraServicios')
 
-const servicios = new ServiciosProducto()
-
+const servicios = new ServiciosCompra()
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/mostrar', async (req, res) => {
     try{
-        const productos = await servicios.listarProductos()
-        res.json(productos)
+        const compra = await servicios.listarCompra()
+        res.json(compra)
     }
     catch(error){
         res.status(404).json({
@@ -23,7 +21,7 @@ router.get('/', async (req, res) => {
 router.get('/buscar/:id', async (req, res) =>{
     try {
         const id = req.params.id
-        const producto = await servicios.buscarPrudcto(id)
+        const producto = await servicios.buscarCompra(id)
         if(!producto){
             throw new Error('Producto no encontrado')
         }
